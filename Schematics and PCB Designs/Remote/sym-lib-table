@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "Enkapsel_programmering-rescue")(type "KiCad")(uri "C:/Users/Jonas Gartner/Downloads/Enkapsel_programmering/Enkapsel_programmering/Enkapsel_programmering-rescue.kicad_sym")(options "")(descr ""))
+  (lib (name "ATmega328P")(type "Legacy")(uri "/Users/andreas/Documents/Projekt/Enkapsel_programmering/Library/ATMEGA328-PU.lib")(options "")(descr ""))
+)
