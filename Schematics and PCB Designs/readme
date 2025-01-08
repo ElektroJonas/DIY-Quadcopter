@@ -1,0 +1,2 @@
+The quadcopter has a schematic but currently no pcb design as it was realised on a experimental board. 
+The remote has a schematic and pcb design. The pcb design can be improved further by adding 100nF capacitors on the ADC inputs to filter out noise
