@@ -1,8 +1,8 @@
-# Quadcopter Built from Scratch
+# Quadcopter Built From Scratch
 
-The purpose of this project is to apply and enhance our knowledge in control theory, signal processing, and electronic design by developing a fully functional quadcopter drone from scratch.
+The purpose of this project is to apply and enhance our knowledge in control theory, signal processing, and electronic design by developing a fully functional quadcopter drone.
 
-Below are two figures showing the current progress of the project:
+Below are two figures showing the result the project!
 
 | Controller | Quadcopter Drone  |                                                                                                                                                   
 | ---           | ---           |                                                                                                                                                   
