@@ -6,5 +6,5 @@ Below are two figures showing the current progress of the project:
 
 | Controller | Quadcopter Drone  |                                                                                                                                                   
 | ---           | ---           |                                                                                                                                                   
-| ![](https://github.com/ElektroJonas/DIY-Quadcopter/blob/main/Pictures/IMG_3621.jpg))  |  ![](https://github.com/ElektroJonas/DIY-Quadcopter/blob/main/Pictures/IMG_3623.jpg) |
+| ![](https://github.com/ElektroJonas/DIY-Quadcopter/blob/main/Pictures/IMG_3621.jpg)  |  ![](https://github.com/ElektroJonas/DIY-Quadcopter/blob/main/Pictures/IMG_3623.jpg) |
 
