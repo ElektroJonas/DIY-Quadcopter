@@ -5,7 +5,6 @@
   The theoretical background is described in the report at: https://github.com/ElektroJonas/Quadcopter-Control
   Created in 2024 by Jonas Gartner and Sigge Axelsson at Uppsala University in Sweden.
 */
-
 #include "MPU6050.h"
 #include <EEPROM.h>
 #include "Wire.h"
@@ -60,7 +59,7 @@ void register_new_master(const esp_now_recv_info_t* info, const uint8_t*, int, v
 // -------------------- Pins --------------------
 const int M1 = 4, M2 = 5, M3 = 6, M4 = 7;
 const int SDA_pin = 9, SCL_pin = 10;
-const int batMeasPin = 1;
+const int batMeasPin = 1, calibratePin = 0;
 
 // -------------------- Sensor Variables --------------------
 MPU6050 accelgyro;
@@ -96,8 +95,8 @@ float refYRate = 0, e_y_prev_rate = 0, P_y_rate = 0, I_y_rate = 0, D_y_rate = 0;
 float refZRate = 0, e_z_prev_rate = 0, P_z_rate = 0, I_z_rate = 0, D_z_rate = 0;
 
 // PID Coefficients
-float Kp_angle = 0.5, Ki_angle = 0, Kd_angle = 0;
-float Kp_rate = 0.8, Ki_rate = 3, Kd_rate = 0.02;
+float Kp_angle = 0.4, Ki_angle = 0, Kd_angle = 0;
+float Kp_rate = 0.7, Ki_rate = 2.5, Kd_rate = 0.02;
 float Kp_z_rate = 1, Ki_z_rate = 4, Kd_z_rate = 0;
 
 // Kalman Variables
@@ -143,7 +142,7 @@ void getTransmission() {
   lastTransmission = millis();
   throttle = (received_data >> 24) & 0xFF;
   throttle = (throttle > 55) ? throttle - 55 : 0;
-  if(!hold) PCOM = map(throttle, 0, 200, 1000, 1800); //Joystick 0 position equals 138-50 => 1440 throttle
+  if(!hold) PCOM = map(throttle, 0, 200, 1300, 1600); //Joystick 0 position equals 138-50 => 1440 throttle
   refXAng = (float)((received_data >> 8) & 0xFF) - 138; //Sensor rotated by 90deg in late stage so refx becomes refy, therefore we shift by 8 instead of 16
   refXAng = (refXAng > -5 && refXAng < 5) ? 0 : refXAng;
   refXAng /= -4;
@@ -159,7 +158,7 @@ void getTransmission() {
     EEPROM.write(0, 1);
     EEPROM.commit();
     delay(10);
-    //ESP.restart();
+    ESP.restart();
   }
   motorsOn = (received_data >> 2) & 0x01;
   hold = (received_data >> 1) & 0x01;
@@ -252,6 +251,7 @@ void kalman_1d(float& x, float& P, float u, float y, float Q, float R, float G, 
 
 // ============================== SETUP ==============================
 void setup() {
+  pinMode(calibratePin, INPUT);
   Serial.begin(115200);
   analogReadResolution(12);
   analogSetAttenuation(ADC_2_5db);
@@ -275,7 +275,7 @@ void setup() {
   accelgyro.setFullScaleGyroRange(0x03);      // Full Scale Range: ±2000°/s
   accelgyro.setFullScaleAccelRange(0x01);     // Full Scale Range: ±4g
   accelgyro.setDLPFMode(MPU6050_DLPF_BW_10);  // Low-Pass filter: MPU6050_DLPF_BW_10 = Bandwidth 10Hz
-  gyroscopeRes = 2000.0 / 32768.0;            // Adjust based on setFullScaleGyroRange!
+  gyroscopeRes = 2000.0 / 32768.0;            // Adjust based on setFullScaleGyroRange!escset
   accelerationRes = 4.0 / 32768.0;            // Adjust based on setFullScaleAccelRange!
 
   if (!accelgyro.testConnection()) {
@@ -285,10 +285,18 @@ void setup() {
   }
   Serial.println("MPU6050 connection successful!");
 
+  for (int i = 0; i < 200; i++) {
+    delay(10);
+    if (!digitalRead(calibratePin)) {
+      Serial.print("Calibration Button pressed B)");
+      escSetup();
+      break;
+    }
+  }
+
   // Sensor Calibration
   if (EEPROM.read(0)) {
     Serial.println("Performing calibration...");
-    escSetup();
     calibrateMPU6050();
     setEEpromOffsets();
     EEPROM.write(0, 0);
@@ -310,9 +318,9 @@ void setup() {
 
   // Set Parameters With Serial Monitor
   //Serial.println("\n[RATE] Send rate roll/pitch parameters as K_p,K_i,K_d:");
-  //setParamsSerial(Kp_rate, Ki_rate, Kd_rate);
+  setParamsSerial(Kp_rate, Ki_rate, Kd_rate);
   //Serial.println("\n[RATE] Send rate yaw parameters as K_p,K_i,K_d:");
-  //setParamsSerial(Kp_z_rate, Ki_z_rate, Kd_z_rate);
+  setParamsSerial(Kp_z_rate, Ki_z_rate, Kd_z_rate);
   Serial.println("\n[ANGLE] Send angle roll/pitch parameters as K_p,K_i,K_d:");
   setParamsSerial(Kp_angle, Ki_angle, Kd_angle);
   Serial.println("\nParameters Set!");
