@@ -6,5 +6,5 @@ A demonstration of the drone can be found here: https://www.youtube.com/watch?v=
 
 | Drone | Remote |                                                                                                                                                   
 | ---           | ---           |                                                                                                                                                   
-| ![](https://github.com/ElektroJonas/DIY-Quadcopter/blob/main/Pictures/IMG_3621.jpg)  |  ![](https://github.com/ElektroJonas/DIY-Quadcopter/blob/main/Pictures/IMG_3623.jpg) |
+| ![](https://github.com/ElektroJonas/DIY-Quadcopter/blob/main/Pictures/IMG_3623.jpg) | ![](https://github.com/ElektroJonas/DIY-Quadcopter/blob/main/Pictures/IMG_3621.jpg) |
 
