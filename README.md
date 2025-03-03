@@ -1,7 +1,5 @@
 # Quadcopter Built from Scratch
 
-Hello!
-
 This project contains all the materials used in building a quadcopter drone. It was part of a project course in electrical engineering and embedded systems at Uppsala University, where we spent a portion of the semester designing and constructing a quadcopter from scratch using off-the-shelf components and some interesting control algorithms! 🚀
 
 ### Project Demonstration and Summary
