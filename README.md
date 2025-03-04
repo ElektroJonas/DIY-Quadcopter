@@ -3,8 +3,8 @@
 This project contains all the materials used in building a quadcopter drone. It was part of a project course in electrical engineering and embedded systems at Uppsala University, where we spent a portion of the semester designing and constructing a quadcopter from scratch using off-the-shelf components and some interesting control algorithms! 🚀
 
 ### Project Demonstration and Summary
-- A demonstration of the drone can be found here: [YouTube Demonstration](https://youtu.be/1-YmHmeVQKA?si=Rilc_he6dhYzZJqS)  
 - A fun summary of the project's development can be found here: [YouTube Summary](https://youtu.be/-V470g73WhM?si=RAoppi26RXBP144A)  
+- A demonstration of the drone can be found here: [YouTube Demonstration](https://youtu.be/1-YmHmeVQKA?si=Rilc_he6dhYzZJqS)  
 
 ### Final Result
 Below is a figure of the completed drone and its custom-built remote control:
