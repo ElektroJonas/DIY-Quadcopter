@@ -14,7 +14,7 @@ Below is a figure of the completed drone and its custom-built remote control:
 | ![](https://github.com/ElektroJonas/DIY-Quadcopter/blob/main/Pictures/IMG_3623.jpg) | ![](https://github.com/ElektroJonas/DIY-Quadcopter/blob/main/Pictures/IMG_3621.jpg) |
 
 ### Control System  
-The control system consists of two main components: **Attitude Control** and **Altitude Control**.  
+The control system consists of two main components: **Attitude Control** and **Altitude Control**.  Note: Altitude control was not used in the final version of the drone since we didnt get it to work well enough.
 
 - **Attitude Control** (angle relative to the ground plane) is implemented using a cascaded PID controller with a Kalman filter and an internal rate control loop. It relies on a low-cost MEMS sensor (gyroscope/accelerometer) for angle estimation.  
 - **Altitude Control** is managed using a pressure sensor in combination with the MEMS sensor for attitude estimation, supplemented by a Zero Velocity Update (ZUPT) algorithm for improved stability and accuracy.   
